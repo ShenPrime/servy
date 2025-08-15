@@ -47,6 +47,14 @@ defmodule Servy.Handler do
     |> handle_file(conv)
   end
 
+  def route(%Conv{method: "POST", path: "/bears"} = conv) do
+    %{
+      conv
+      | status: 201,
+        resp_body: "Created a #{conv.params["type"]} bear named #{conv.params["name"]}"
+    }
+  end
+
   def route(%Conv{path: path} = conv) do
     %{conv | status: 404, resp_body: "No #{path} here!"}
   end
@@ -63,28 +71,39 @@ defmodule Servy.Handler do
   end
 end
 
-request = """
-GET /wildthings HTTP/1.1/n
-Host: example.com/n
-User-Agent: ExampleBrowser/1.0/n
-Accept: */*/n
+# request = """
+# GET /wildthings HTTP/1.1
+# Host: example.com
+# User-Agent: ExampleBrowser/1.0
+# Accept: */*
+#
+# """
+#
+# request2 = """
+# GET /bears?id=2 HTTP/1.1
+# Host: example.com
+# User-Agent: ExampleBrowser/1.0
+# Accept: */*
+#
+# """
+#
+# request3 = """
+# GET /about HTTP/1.1
+# HOST: example.com
+# User-Agen: ExampleBrowser/1.0
+# Accept: */*
+#
+# """
 
-"""
-
-request2 = """
-GET /bears?id=2 HTTP/1.1/n
-Host: example.com/n
-User-Agent: ExampleBrowser/1.0/n
-Accept: */*/n
-
-"""
-
-request3 = """
-GET /about HTTP/1.1/n
-HOST: example.com/n
-User-Agen: ExampleBrowser/1.0/n
-Accept: */*/n
-
+request4 = """
+POST /bears HTTP/1.1\n
+HOST: example.com\n
+User-Agent: ExampleBrowser/1.0\n
+Accept: */*\n
+Content-Type: application/x-www-form-urlencoded\n
+Content-Length: 21\n
+\n
+name=Baloo&type=Brown\n
 """
 
 # request4 = """
@@ -95,12 +114,12 @@ Accept: */*/n
 #
 # """
 
-response = Servy.Handler.handle(request)
-response2 = Servy.Handler.handle(request2)
-response3 = Servy.Handler.handle(request3)
-# response4 = Servy.Handler.handle(request4)
+# response = Servy.Handler.handle(request)
+# response2 = Servy.Handler.handle(request2)
+# response3 = Servy.Handler.handle(request3)
+response4 = Servy.Handler.handle(request4)
 
-IO.puts(response)
-IO.puts(response2)
-IO.puts(response3)
-# IO.puts(response4)
+# IO.puts(response)
+# IO.puts(response2)
+# IO.puts(response3)
+IO.puts(response4)
