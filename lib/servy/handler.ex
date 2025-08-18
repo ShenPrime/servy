@@ -72,26 +72,26 @@ defmodule Servy.Handler do
 end
 
 # request = """
-# GET /wildthings HTTP/1.1
-# Host: example.com
-# User-Agent: ExampleBrowser/1.0
-# Accept: */*
+# GET /wildthings HTTP/1.1\n
+# Host: example.com\n
+# User-Agent: ExampleBrowser/1.0\n
+# Accept: */*\n
 #
 # """
 #
 # request2 = """
-# GET /bears?id=2 HTTP/1.1
-# Host: example.com
-# User-Agent: ExampleBrowser/1.0
-# Accept: */*
+# GET /bears?id=2 HTTP/1.1\n
+# Host: example.com\n
+# User-Agent: ExampleBrowser/1.0\n
+# Accept: */*\n
 #
 # """
 #
 # request3 = """
-# GET /about HTTP/1.1
-# HOST: example.com
-# User-Agen: ExampleBrowser/1.0
-# Accept: */*
+# GET /about HTTP/1.1\n
+# HOST: example.com\n
+# User-Agen: ExampleBrowser/1.0\n
+# Accept: */*\n
 #
 # """
 
